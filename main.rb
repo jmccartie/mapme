@@ -20,8 +20,13 @@ get '/' do
     save_data(data)
   end
 
-  data = data.map { |d| d[:ip] }
-  return data.to_json
+  points = {
+    "points" => {
+      "point" => data.map {|d| {"ip" => d[:ip]} }
+    }
+  }
+
+  return points.to_json
 end
 
 post '/' do
