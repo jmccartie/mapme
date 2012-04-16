@@ -31,10 +31,11 @@ end
 
 post '/' do
   check_param(:site)
+  check_param(:ip)
   data = settings.cache.get(cache_key())
   data = [] if data.nil?
 
-  data.insert(0, {ip: request.ip, time: Time.now})
+  data.insert(0, {ip: params[:ip], time: Time.now})
   save_data(data)
 
   halt 200
